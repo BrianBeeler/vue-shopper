@@ -62,4 +62,8 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  button:nth-child(2) {
+    margin-left: 10px
+  }
+</style>
