@@ -9,12 +9,12 @@
       </label>
       </div>
     </div>
-    <product-form v-if="!toggleOn" @add:employee="addEmployee" />
-    <product-table v-if="!toggleOn" :employees="employees" 
-      @delete:employee="deleteEmployee"
-      @edit:employee="editEmployee"
+    <product-form v-if="!toggleOn" @add:product="addProduct" />
+    <product-table v-if="!toggleOn" :products="products" 
+      @delete:product="deleteProduct"
+      @edit:product="editProduct"
       />
-    <customer-table v-if="toggleOn" :employees="employees" />
+    <customer-table v-if="toggleOn" :products="products" />
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      employees: [
+      products: [
         {
           id: 1,
           name: 'Hyperbaric Oxygen Tank',
@@ -56,27 +56,27 @@ export default {
     }
   },
   methods: {
-    addEmployee(employee) {
-      employee.purchased = false
+    addProduct(product) {
+      product.purchased = false
 
       // hack for unique id
       const lastId =
-      this.employees.length > 0
-      ? this.employees[this.employees.length - 1].id
+      this.products.length > 0
+      ? this.products[this.products.length - 1].id
       : 0;
       const id = lastId + 1;
-      const newEmployee = { ...employee, id };
+      const newEmployee = { ...product, id };
 
-      this.employees = [...this.employees, newEmployee]
+      this.products = [...this.products, newEmployee]
     },
-    deleteEmployee(id) {
-      this.employees = this.employees.filter(
-      employee => employee.id !== id
+    deleteProduct(id) {
+      this.products = this.products.filter(
+      product => product.id !== id
     )
     },
-    editEmployee(id, updatedEmployee) {
-      this.employees = this.employees.map(employee =>
-      employee.id === id ? updatedEmployee : employee)
+    editProduct(id, updatedProduct) {
+      this.products = this.products.map(product =>
+      product.id === id ? updatedProduct : product)
     }
   }
 }

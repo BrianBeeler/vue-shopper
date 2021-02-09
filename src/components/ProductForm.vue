@@ -5,34 +5,34 @@
     ref="first"
     type="text"
     :class="{ 'has-error': submitting && invalidName }"
-    v-model="employee.name"
+    v-model="product.name"
     @focus="clearStatus"
     @keypress="clearStatus"
   />
-  <label>Employee Price</label>
+  <label>Product Price</label>
   <input
     type="text"
     :class="{ 'has-error': submitting && invalidEmail }"
-    v-model="employee.price"
+    v-model="product.price"
     @focus="clearStatus"
   />
   <p v-if="error && submitting" class="error-message">
     ❗Please fill out all required fields
   </p>
-  <p v-if="success" class="success-message">✅ Employee successfully added</p>
+  <p v-if="success" class="success-message">✅ Product successfully added</p>
   <button>Add Product</button>
 </form>
 </template>
 
 <script>
   export default {
-    name: 'employee-form',
+    name: 'product-form',
     data() {
       return {
         submitting: false,
         error: false,
         success: false,
-        employee: {
+        product: {
           name: '',
           price: '',
         },
@@ -48,8 +48,8 @@
                 return
             }
 
-            this.$emit('add:employee', this.employee)
-            this.employee = {
+            this.$emit('add:product', this.product)
+            this.product = {
                 name: '',
                 price: ''
             }
@@ -65,10 +65,10 @@
     },
     computed: {
         invalidName() {
-            return this.employee.name === ''
+            return this.product.name === ''
         },
         invalidEmail() {
-            return this.employee.price === ''
+            return this.product.price === ''
         }
     }
   }

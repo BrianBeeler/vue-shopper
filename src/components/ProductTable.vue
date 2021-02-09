@@ -8,27 +8,27 @@
         </tr>
       </thead>
       <tbody>
-          <tr v-for="employee in employees" :key="employee.id">
-            <td v-if="editing === employee.id">
-                <input type="text" v-model="employee.name" />
+          <tr v-for="product in products" :key="product.id">
+            <td v-if="editing === product.id">
+                <input type="text" v-model="product.name" />
             </td>
-            <td v-else>{{employee.name}}</td>
-            <td v-if="editing === employee.id">
-                <input type="text" v-model="employee.email" />
+            <td v-else>{{product.name}}</td>
+            <td v-if="editing === product.id">
+                <input type="text" v-model="product.email" />
             </td>
-            <td v-else>{{employee.price}}</td>
-            <td v-if="editing === employee.id">
-                <button @click="editEmployee(employee)">Save</button>
+            <td v-else>{{product.price}}</td>
+            <td v-if="editing === product.id">
+                <button @click="editEmployee(product)">Save</button>
                 <button class="muted-button" @click="editing = null">Cancel</button>
             </td>
             <td v-else>
-                <button @click="editMode(employee.id)">Edit</button>
-                <button @click="$emit('delete:employee', employee.id)">Delete</button>
+                <button @click="editMode(product.id)">Edit</button>
+                <button @click="$emit('delete:product', product.id)">Delete</button>
             </td>
         </tr>
       </tbody>
     </table>
-    <p v-if="employees.length < 1" class="empty-table">No employees</p>
+    <p v-if="products.length < 1" class="empty-table">No Products or Services</p>
         <table v-else>
     </table>
   </div>
@@ -38,7 +38,7 @@
   export default {
     name: 'product-table',
     props: {
-        employees: Array
+        products: Array
     },
     data() {
         return {
@@ -49,13 +49,13 @@
         editMode(id) {
             this.editing = id
         },
-        editEmployee(employee) {
-            if (employee.name === '' || employee.email === '') return
-            this.$emit('edit:employee', employee.id, employee)
+        editProduct(product) {
+            if (product.name === '' || product.email === '') return
+            this.$emit('edit:product', product.id, product)
             this.editing = null
         },
-        cancelEdit(employee) {
-            Object.assign(employee, this.cachedEmployee)
+        cancelEdit(product) {
+            Object.assign(product, this.cachedProduct)
             this.editing = null;
         }
     }

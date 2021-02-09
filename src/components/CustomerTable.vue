@@ -1,5 +1,5 @@
 <template>
-  <div id="employee-table">
+  <div id="customer-table">
     <table>
       <thead>
         <tr>
@@ -9,23 +9,23 @@
         </tr>
       </thead>
       <tbody>
-          <tr v-for="employee in employees" :key="employee.id">
-            <td v-if="editing === employee.id">
-                <input type="text" v-model="employee.name" />
+          <tr v-for="product in products" :key="product.id">
+            <td v-if="editing === product.id">
+                <input type="text" v-model="product.name" />
             </td>
-            <td v-else>{{employee.name}}</td>
-            <td v-if="editing === employee.id">
-                <input type="text" v-model="employee.email" />
+            <td v-else>{{product.name}}</td>
+            <td v-if="editing === product.id">
+                <input type="text" v-model="product.email" />
             </td>
-            <td v-else>{{employee.price}}</td>
+            <td v-else>{{product.price}}</td>
             <td>
-                <button @click="buyItem(employee)" v-if="!employee.purchased">Buy</button>
-                <button v-if="employee.purchased">Purchased</button>
+                <button @click="buyItem(product)" v-if="!product.purchased">Buy</button>
+                <button v-if="product.purchased">Purchased</button>
             </td>
         </tr>
       </tbody>
     </table>
-    <p v-if="employees.length < 1" class="empty-table">No employees</p>
+    <p v-if="products.length < 1" class="empty-table">No employees</p>
         <table v-else>
     </table>
   </div>
@@ -35,7 +35,7 @@
   export default {
     name: 'customer-table',
     props: {
-        employees: Array
+        products: Array
     },
     data() {
         return {
@@ -46,9 +46,8 @@
         editMode(id) {
             this.editing = id
         },
-        buyItem(employee) {
-            employee.purchased = true
-            console.log(employee)
+        buyItem(product) {
+            product.purchased = true
         },
         cancelEdit(employee) {
             Object.assign(employee, this.cachedEmployee)
